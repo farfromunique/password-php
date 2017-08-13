@@ -2,7 +2,7 @@
     "name": "acwpd/paswordgenerator",
     "description": "A tool to generate a random password, using random.org's randomness",
     "type": "project",
-    "license": "MIT", /* inheirited from Slim Skeleton */
+    "license": "MIT",
     "authors": [
         {
             "name": "Aaron C",

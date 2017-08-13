@@ -2,13 +2,29 @@
     "name": "acwpd/paswordgenerator",
     "description": "A tool to generate a random password, using random.org's randomness",
     "type": "project",
-    "require": {
-        "slim/slim": "^3.8"
-    },
+    "license": "MIT", /* inheirited from Slim Skeleton */
     "authors": [
         {
             "name": "Aaron C",
             "email": "git@acwpd.com"
         }
-    ]
+    ],
+    "require": {
+        "php": ">=5.5.0",
+        "slim/slim": "^3.1",
+        "slim/php-view": "^2.0",
+        "monolog/monolog": "^1.17"
+    },
+    "require-dev": {
+        "phpunit/phpunit": ">=4.8 < 6.0"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "start": "php -S 0.0.0.0:8080 -t public public/index.php",
+        "test": "phpunit"
+    }
 }

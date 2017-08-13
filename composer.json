@@ -1,0 +1,14 @@
+{
+    "name": "acwpd/paswordgenerator",
+    "description": "A tool to generate a random password, using random.org's randomness",
+    "type": "project",
+    "require": {
+        "slim/slim": "^3.8"
+    },
+    "authors": [
+        {
+            "name": "Aaron C",
+            "email": "git@acwpd.com"
+        }
+    ]
+}

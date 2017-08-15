@@ -13,7 +13,8 @@
         "php": ">=5.5.0",
         "slim/slim": "^3.1",
         "slim/php-view": "^2.0",
-        "monolog/monolog": "^1.17"
+        "monolog/monolog": "^1.17",
+        "datto/json-rpc-http": "~3.2"
     },
     "require-dev": {
         "phpunit/phpunit": ">=4.8 < 6.0"
@@ -21,6 +22,11 @@
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "ACWPD\\": "src/Classes/"
         }
     },
     "scripts": {

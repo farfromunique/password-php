@@ -21,6 +21,7 @@ $app->post('/a/password', function ($request, $response, $args) {
 
     $client = new ACWPD\RandomOrgClient($this->get('settings')['randomorg']['api_key']);
     $result['passwords'] = $client->getpassword($parameters);
+    $result['count'] = $parameters['count'];
     
 
     return $this->renderer->render($response, 'ajax.phtml', $result);

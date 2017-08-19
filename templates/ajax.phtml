@@ -1,0 +1,7 @@
+<ul class="list-group">
+<?php
+	foreach ($passwords as $key => $value) {
+		echo '<li class="list-group-item">' . htmlspecialchars($value['password']) . '</li>' . "\n";
+	}
+?>
+</ul>

@@ -8,11 +8,20 @@ $app->get('/', function ($request, $response) {
     return $this->renderer->render($response, 'index.phtml');
 });
 
-$app->get('/a/password', function ($request, $response, $args) {
-    
+$app->post('/a/password', function ($request, $response, $args) {
+    $req = $request->getParsedBody();
+    $range = explode(':',$req['character-range']);
+    $parameters = [
+        'min' =>  $range[0],
+        'max' =>  $range[1],
+        'length' =>  $req['password-length'],
+        'exclude' =>  str_split($req['exclude']),
+        'count' =>  $req['password-count']
+    ];
+
     $client = new ACWPD\RandomOrgClient($this->get('settings')['randomorg']['api_key']);
-    $result['bitsLeft'] = $client->getUsage()['result']['bitsLeft'];
-    $result['password'] = $client->getpassword(['min'=>33,'max'=>126],[34,36,39,58,59,60,62,73,79,96,105,108,111,124],10);
+    $result['passwords'] = $client->getpassword($parameters);
+    
 
     return $this->renderer->render($response, 'ajax.phtml', $result);
 });

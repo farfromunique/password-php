@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace ACWPD;
 
@@ -18,33 +18,51 @@ class RandomOrgClient extends \Datto\JsonRpc\Http\Client {
 		return $this->client->send();
 	}
 
-	public function getPassword (
-		array $include = ['min' => 33, 'max' => 126],
-		array $exclude = [34,36,39,58,59,60,62,73,79,96,105,108,111,124],
-		int $length) {
-			$n = (int)$length * 1.1;
+	public function getPassword($data) {
+		$throttle = new \ACWPD\RequestThrottler();
+		for ($i=0; $i < $data['count']; $i++) { 
+			$n = (int)$data['length'];
 
 			$payload = $this->api_key;
 			$payload['n'] = $n;
-			$payload['min'] = $include['min'];
-			$payload['max'] = $include['max'];
+			$payload['min'] = $data['min'];
+			$payload['max'] = $data['max'];
 			$payload['replacement'] = true;
 			$payload['base'] = 10;
-
-			$this->client->query(1, 'generateIntegers', $payload);
-			$data = $this->client->send();
-
-			$passletters = array();
-			foreach ($data['result']['random']['data'] as $key => $value) {
-				if( (! \in_array($value,$exclude)) && count($passletters) < $length) {
-					$passletters[] = chr($value);
+			for ($j=$data['min']; $j < $data['max']; $j++) {
+				if (! in_array($j, $data['exclude'])) {
+					$chars[] = chr($j);
 				}
 			}
 
-			$password = \implode('',$passletters);
+			$payload['min'] = 1;
+			$payload['max'] = (count($chars) - count($data['exclude']));
+			$this->client->query(1, 'generateIntegers', $payload);
+			$res = $this->client->send()['result'];
+			$passletters = array();
+			foreach ($res['random']['data'] as $key => $value) {
+				$passletters[] = $chars[$value];
+			}
 
-			return $password;
-			
+			$out['password'] = \implode('', $passletters);
+			$out['bitsLeft'] = $res['bitsLeft'];
+			$out['reqLeft'] = $res['requestsLeft'];
+
+			$return[] = $out;
+			$throttle->delayPerAdvisory($res['advisoryDelay']);
+		}
+		return $return;
+		
 	}
-	
+
+	public function converASCIItoInteger($char) {
+		if (\is_array($char)) {
+			foreach ($char as $key => $value) {
+				$out[] = ord($value);
+			}
+		} else {
+			$out = ord($char);
+		}
+		return $out;
+	}
 }

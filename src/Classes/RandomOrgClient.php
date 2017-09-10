@@ -2,7 +2,8 @@
 
 namespace ACWPD;
 
-class RandomOrgClient extends \Datto\JsonRpc\Http\Client {
+class RandomOrgClient extends \Datto\JsonRpc\Http\Client
+{
 	private $api_key;
 	private $url;
 	private $client;
@@ -14,7 +15,8 @@ class RandomOrgClient extends \Datto\JsonRpc\Http\Client {
 		$this->client = new \Datto\JsonRpc\Http\Client($this->url);
 	}
 
-	public function getUsage() {
+	public function getUsage()
+	{
 		$this->client->query(0, 'getUsage', $this->api_key);
 		return $this->client->send();
 	}

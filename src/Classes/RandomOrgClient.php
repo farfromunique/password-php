@@ -59,10 +59,23 @@ class RandomOrgClient extends \Datto\JsonRpc\Http\Client {
 		if (\is_array($char)) {
 			foreach ($char as $key => $value) {
 				$out[] = ord($value);
+	private function generateDictionary(array $exclude): array
+	{
+		$ASCIIStart = 33; // Lowest-value ASCII character that is printable (!) (Space is 32)
+		$ASCIIEnd = 126; // Highest-value ASCII character that is printable (})
+		$highestIndex = 0; // Highest Index used in dictionary
+		$dictionary = [];
+
+		for ($i=$ASCIIStart; $i < $ASCIIEnd; $i++) {
+			if (! in_array(chr($i), $exclude)) {
+				$highestIndex++;
+				$dictionary[$highestIndex] = chr($i);
 			}
 		} else {
 			$out = ord($char);
 		}
 		return $out;
+
+		return $dictionary;
 	}
 }

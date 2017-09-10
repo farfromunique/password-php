@@ -7,8 +7,9 @@ class RandomOrgClient extends \Datto\JsonRpc\Http\Client {
 	private $url;
 	private $client;
 
-	public function __construct(string $key) {
-		$this->api_key = ["apiKey" => $key];
+	public function __construct(string $key)
+	{
+		$this->api_key = $key;
 		$this->url = 'https://api.random.org/json-rpc/1/invoke';
 		$this->client = new \Datto\JsonRpc\Http\Client($this->url);
 	}

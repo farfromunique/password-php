@@ -41,7 +41,7 @@ Assuming that a user wants to be as secure as possible, the following are curren
 * Use as many different character types as possible  
 * Use two-factor authentication  
 
-In the end, we are all faced with a trade-off between security and convenience: using `1p@Ssw0rd4all` will satisfy most sites’ requirements, even though it isn’t very secure. However, it’s super convenient.
+In the end, we are all faced with a trade-off between security and convenience: using `1p@Ssw0rd4all` will satisfy most sites’ requirements, even though it isn’t very secure. However, it’s super convenient.  
 On the other end of the spectrum, having to enter `95/=_^i(L%sIoeJCPg]$wFQ-T&8l7R6u=:TVC_#gdNrl,H&]f` AND answer a prompt on your phone makes it very difficult for anyone (including you) to access your account… but it’s not very convenient.
 
 **[Password.acwpd.com](http://password.acwpd.com)** isn’t a cure-all, and doesn’t aim to be. All it claims to do is provide customizable, truly random passwords.  

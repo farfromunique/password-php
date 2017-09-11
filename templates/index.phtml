@@ -48,17 +48,9 @@
 						</div>
 						<div class="form-group">
 							<label for="character-range">
-								Choose the list your password will come from
-							</label>
-							<input type="text" class="form-control" name="character-range" id="character-range" value="33:126" />
-							<input type="hidden" name="min" id="min-character" value="33" />
-							<input type="hidden" name="max" id="max-character" value="126" />
-						</div>
-						<div class="form-group">
-							<label for="character-range">
 								Type the characters you want to exclude
 							</label>
-							<input type="text" class="form-control" name="exclude" id="exclude" value="1i|Il0oO`'.,_-;:" />
+							<input type="text" class="form-control" name="exclude" id="exclude" value="1i|Il!0oO`'.,_-;:" />
 						</div>
 						<a class="btn btn-primary btn-lg btn-block" ic-post-to="/a/password" ic-target="#passwords">
 							Get passwords!
@@ -84,66 +76,7 @@
 			<script	src="/js/jquery-3.2.1.min.js"></script>
 			<script src="/js/bootstrap.min.js"></script>
 			<script	src="/js/intercooler-1.1.2.min.js"></script>
-			<script>
-
-				function addCharToList(char) {
-					var ul = document.querySelector('#all-characters');
-					var liToAdd = document.createElement('li');
-					liToAdd.innerText = char;
-					ul.appendChild(liToAdd);
-				}
-				function removeExcludedChars() {
-					let exclude = document.querySelector('#exclude').value;
-					let ex = exclude.split('');
-					ex.forEach(
-						function(char){
-							for (let i = 0; i < all.childElementCount; i++) {
-								if (all.childNodes[i].innerText == char) {
-									all.childNodes[i].remove();
-								}
-							}
-						}
-					);
-				}
-				function makeList() {
-					let symbols = document.querySelectorAll('#all-characters > li');
-					symbols.forEach(function(el) {
-						el.remove();
-					}, this);
-					let range = document.querySelector('#character-range').value;
-					let min = range.substr(0,range.indexOf(':'))-0;
-					let max = range.substr(range.indexOf(':')+1)-0;
-					
-					for (let i = min; i < max; i++) {
-						addCharToList(String.fromCharCode(i));
-					}
-				}
-
-				$('#exclude').keyup(function(){
-					makeList()
-					let all = document.querySelector('#all-characters');
-					let exclude = document.querySelector('#exclude').value;
-					let ex = exclude.split('');
-					ex.forEach(
-						function(char){
-							for (let i = 0; i < all.childElementCount; i++) {
-								if (all.childNodes[i].innerText == char) {
-									all.childNodes[i].remove();
-								}
-							}
-						}
-					);
-				});
-
-				document.addEventListener('load',makeList());
-				
-				document.querySelector('form').addEventListener('submit',
-					function mySubmitFunction(evt) {
-						evt.preventDefault();
-						return false;
-				});
-
-			</script>
+			<script src="/js/characters.js"></script>
 		</div>
     </body>
 </html>

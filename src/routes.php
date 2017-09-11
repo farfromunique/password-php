@@ -9,11 +9,9 @@ $app->get('/', function ($request, $response) {
 });
 
 $app->post('/a/password', function ($request, $response, $args) {
+	
 	$req = $request->getParsedBody();
-	$range = explode(':', $req['character-range']);
 	$parameters = [
-		'min' =>  $range[0],
-		'max' =>  $range[1],
 		'length' =>  $req['password-length'],
 		'exclude' =>  str_split($req['exclude']),
 		'count' =>  $req['password-count']
@@ -23,7 +21,6 @@ $app->post('/a/password', function ($request, $response, $args) {
 	$result['passwords'] = $client->getpassword($parameters);
 	$result['count'] = $parameters['count'];
 	
-
 	return $this->renderer->render($response, 'ajax.phtml', $result);
 });
 

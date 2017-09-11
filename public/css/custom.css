@@ -1,5 +1,9 @@
-html {font-family: 'Josefin Slab', serif;}}
-h1 {font-family: 'Source Sans Pro', sans-serif;}
+body {
+	font-family: 'Source Sans Pro', sans-serif ;
+	font-size: 1.75em;
+}
+h1, h2 {font-family: 'Josefin Slab', serif;}
+
 #passwords>ul>li {
 	font-family: 'PT Mono', monospace;
     letter-spacing: 3px;
@@ -16,3 +20,13 @@ h1 {font-family: 'Source Sans Pro', sans-serif;}
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f6f6', endColorstr='#f5f6f6',GradientType=0 );
 }
 #all-characters>li {font-family: 'PT Mono', monospace;}
+
+blockquote p {
+	margin: 0 0 .25em;
+}
+
+code {
+	font-family: 'PT Mono', monospace;
+	background-color: #F3F315;
+	color: #202020;
+}

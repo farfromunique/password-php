@@ -36,7 +36,7 @@ class RandomOrgClient extends \Datto\JsonRpc\Http\Client
 				'apiKey' => $this->api_key,
 				'n' => (int)$data['length'],
 				'min' => $min,
-				'max' => $printableASCIICount - count($dictionary),
+				'max' => count($dictionary),
 				'replacement' => true,
 				'base' => 10
 			];

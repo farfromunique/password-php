@@ -30,13 +30,20 @@
 						These passwords are not designed to be memorized; they're designed for use with password managers, such as those built in to modern browsers, or standalone products. Because of this, they have a lot of characters in them, many of which are "special". We're working on a way to ensure that each password includes 1 capital, 1 lower-case, 1 number, and 1 special character; until we have that feature in place, please just generate a new password if the one(s) you generated didn't meet your requirements.
 					</p>
 					<p>
-						We've written an article explining why this site is needed. <a href="/discussion-of-passwords">Give it a read</a> if you want.
+						We've written an <a href="/discussion-of-passwords">article</a> explining why this site is needed. <a href="/discussion-of-passwords">Give it a read</a> if you want.
 					</p>
+					<p>
+						<a href="http://www.xkcd.com">The webcomic XKCD</a> has (as is so often the case) a comic that is relevant: <a href="https://xkcd.com/936/">Check it out! (And then come back)</a>. Because of the popularity of this method, we offer a "passphrase" option, which will generate this style of password. "Standard" is the traditional numbers/letters/symbols kind.
+					</p>
+				</div>
+				<div class="col-md-12">
+					<a class="btn btn-primary btn-lg btn-block toggle" href="#" role="button" id="switchToPhrase">Switch to Passphrase style</a>
+					<a class="btn btn-primary btn-lg btn-block toggle hidden" href="#" role="button" id="switchToStandard">Switch to Standard style</a>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-4">
-					<form role="form">
+				<div class="col-md-4 toggle" id="standard">
+					<form role="form"class="standards">
 						<div class="form-group">
 							<label for="password-length ">
 								Number of characters in password
@@ -60,9 +67,37 @@
 						</a>
 					</form>
 				</div>
-				<div class="col-md-4">
+				<div class="col-md-4 toggle hidden" id="phrase">
+					<form role="form" class="phrases">
+						<div class="form-group">
+							<label for="password-length ">
+								Number of words in passphrase
+							</label>
+							<input type="number" class="form-control" name="password-length" id="password-length" value="4" />
+						</div>
+						<div class="form-group">
+							<label for="password-count">
+								Number of passwords to generate
+							</label>
+							<input type="number" class="form-control" name="password-count" id="password-count" value="2" />
+						</div>
+						<a class="btn btn-primary btn-lg btn-block" ic-post-to="/a/passphrase" ic-target="#passwords">
+							Get passwords!
+						</a>
+					</form>
+				</div>
+				<div class="col-md-4 toggle" id="standard-desc">
 					<p>
 						Your password will include only characters from this list:
+					</p>
+					<ul class="list-inline" id="all-characters">
+						
+					</ul>
+					
+				</div>
+				<div class="col-md-4 toggle hidden" id="phrase-desc">
+					<p>
+						Your passphrase will consist of several words (your choice how many) selected from <a href="http://www.wordnik.com/">Wordnik</a>'s Dictionaries. For consistancy, all words are lower-case, regardless of original usage (even words that are only proper nouns, such as 'Doug', 'Portugal', or 'San Antonio'). Additionally, if there is a space in the word ('Los Angeles' or 'ice cream'), that space is replaced with an underscore (_). These phrases are almost certain to NOT include numbers or special characters.
 					</p>
 					<ul class="list-inline" id="all-characters">
 						
@@ -80,6 +115,19 @@
 			<script src="/js/bootstrap.min.js"></script>
 			<script	src="/js/intercooler-1.1.2.min.js"></script>
 			<script src="/js/characters.js"></script>
+			<script language="javascript">
+				let phraseBtn = document.querySelector('#switchToPhrase');
+					phraseBtn.addEventListener('click', function () {
+						let toggle = document.querySelectorAll('.toggle');
+						toggle.forEach(el => el.classList.toggle('hidden'));
+					});
+				let standardBtn = document.querySelector('#switchToStandard');
+					standardBtn.addEventListener('click', function () {
+						let toggle = document.querySelectorAll('.toggle');
+						toggle.forEach(el => el.classList.toggle('hidden'));
+					});
+
+			</script>
 		</div>
     </body>
 </html>

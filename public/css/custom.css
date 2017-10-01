@@ -30,3 +30,8 @@ code {
 	background-color: #F3F315;
 	color: #202020;
 }
+
+#switchToPhrase, #switchToStandard {
+	margin-top: 5px !important;
+	margin-bottom: 5px !important;
+}

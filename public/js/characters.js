@@ -42,7 +42,12 @@ $('#exclude').keyup(function () {
 
 document.addEventListener('load', makeList());
 
-document.querySelector('form').addEventListener('submit',function mySubmitFunction(evt) {
+document.querySelector('form.phrases').addEventListener('submit', function mySubmitFunction(evt) {
+	evt.preventDefault();
+	return false;
+});
+
+document.querySelector('form.standards').addEventListener('submit', function mySubmitFunction(evt) {
 	evt.preventDefault();
 	return false;
 });

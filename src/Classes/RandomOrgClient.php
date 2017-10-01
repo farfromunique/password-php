@@ -21,7 +21,45 @@ class RandomOrgClient extends \Datto\JsonRpc\Http\Client
 		return $this->client->send();
 	}
 
-	public function getPassword($data)
+	public function verifyResponse($result)
+	{
+		if (isset($result['error'])) {
+				$message = 'Error Processing Request: ' . $result['error']['message'];
+				if (! $result['error']['message'] === null) {
+					$message .= '; Parameter: ' . $result['error']['data'];
+					$message .= '; Content: ' . $payload[$result['error']['data']];
+				}
+				throw new \Exception($message, $result['error']['code']);
+			} elseif (isset($result['result'])) {
+				return $result;
+			} else {
+				$err = \var_export($result);
+				throw new \Exception("JSON RPC response contained neither 'error' nor 'result'. Response was: " . $err, 0);
+			}
+	}
+
+	function getRandomInt(int $max = 100, int $count = 3): array
+	{
+		$min = 1; // get numbers between 1 and X, inclusive. If it were exclusive, this would be 0
+
+		$payload = [
+			'apiKey' => $this->api_key,
+			'n' => $count,
+			'min' => $min,
+			'max' => $max,
+			'replacement' => true,
+			'base' => 10
+		];
+
+		$this->client->query(1, 'generateIntegers', $payload);
+		$result = $this->client->send();
+		$result = $this->verifyResponse($result);
+		$res = $result['result'];
+		RequestThrottler::delayPerAdvisory($res['advisoryDelay']);
+		return $res['random']['data'];
+	}
+
+	public function getPassword($data): array
 	{
 		$min = 1; // get numbers between 1 and X, inclusive. If it were exclusive, this would be 0
 

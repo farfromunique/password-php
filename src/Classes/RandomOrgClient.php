@@ -24,9 +24,6 @@ class RandomOrgClient extends \Datto\JsonRpc\Http\Client
 	public function getPassword($data)
 	{
 		$min = 1; // get numbers between 1 and X, inclusive. If it were exclusive, this would be 0
-		$ASCIITopEnd = 126; // Highest-value ASCII character that is printable (})
-		$ASCIIBottomEnd = 33; // Lowest-value ASCII character that is printable (!) (Space is 32)
-		$printableASCIICount = $ASCIITopEnd - $ASCIIBottomEnd;
 
 		$dictionary = $this->generateDictionary($data['exclude']);
 

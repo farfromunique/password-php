@@ -20,7 +20,7 @@ $app->post('/a/password', function ($request, $response, $args) {
 	$client = new ACWPD\RandomOrgClient($this->get('settings')['randomorg']['api_key']);
 	$result['passwords'] = $client->getpassword($parameters);
 	$result['count'] = $parameters['count'];
-	
+	$result['method'] = 'string';
 	return $this->renderer->render($response, 'ajax.phtml', $result);
 });
 
@@ -54,6 +54,7 @@ $app->post('/a/passphrase', function($request, $response, $args) {
 		unset($phraseBuilder);
 	}
 	$result['passwords'] = $phrases;
+	$result['method'] = 'phrase';
 	return $this->renderer->render($response, 'ajax.phtml', $result);
 });
 

@@ -31,26 +31,24 @@ require_once 'wordnik/Swagger.php';
 // Cannot redeclare phpunit_autoload()
 // require_once '/usr/lib/php/PHPUnit/Autoload.php';
 
-class BaseApiTest extends PHPUnit_Framework_TestCase {
+class BaseApiTest extends PHPUnit_Framework_TestCase
+{
+    public function setUp()
+    {
+        $this->apiUrl = 'http://api.wordnik.com/v4';
+        $this->apiKey = getenv('API_KEY');
+        $this->username = getenv('USER_NAME');
+        $this->password = getenv('PASSWORD');
+        $this->client = new APIClient($this->apiKey, $this->apiUrl);
+        $this->accountApi = new AccountApi($this->client);
+        $this->wordApi = new WordApi($this->client);
+        $this->wordListApi = new WordListApi($this->client);
+        $this->wordListsApi = new WordListsApi($this->client);
+        $this->wordsApi = new WordsApi($this->client);
+    }
 
-  public function setUp() {
-    $this->apiUrl = 'http://api.wordnik.com/v4';
-    $this->apiKey = getenv('API_KEY');
-    $this->username = getenv('USER_NAME');
-    $this->password = getenv('PASSWORD');
-    $this->client = new APIClient($this->apiKey, $this->apiUrl);
-    $this->accountApi = new AccountApi($this->client);
-    $this->wordApi = new WordApi($this->client);
-    $this->wordListApi = new WordListApi($this->client);
-    $this->wordListsApi = new WordListsApi($this->client);
-    $this->wordsApi = new WordsApi($this->client);
-  }
-
-  public function tearDown() {
-      unset($this->client);
-  }
-
+    public function tearDown()
+    {
+        unset($this->client);
+    }
 }
-
-
-?>

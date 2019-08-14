@@ -18,7 +18,7 @@ return [
 
         // Random.org data
         'randomorg' => [
-            'api_address' => 'https://api.random.org/json-rpc/1/invoke',
+            'api_address' => 'https://api.random.org/json-rpc/2/invoke',
             'api_key' => getenv('RANDOM_ORG')
         ],
         
